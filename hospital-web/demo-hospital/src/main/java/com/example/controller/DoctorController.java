@@ -41,7 +41,7 @@ public class DoctorController {
 	}
 
 	@PostMapping("/register")
-	public String registerDoctor(@Validated Model model, @ModelAttribute Doctor doctor, BindingResult result) {
+	public String registerDoctor(@Validated @ModelAttribute Doctor doctor, BindingResult result, Model model) {
 		int rpta;
 		if (result.hasErrors()) {
 			model.addAttribute("ciudades", ciudadService.listCity());

@@ -5,9 +5,93 @@
 <body>
 
 	<th:block th:include="fragments/navbar"></th:block>
-	<div class="container"></div>
-	<th:block th:include="fragments/scripts"></th:block>
+	<div class="container">
 	
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Registrar Doctor</div>
+			<div class="card-body">
+				<form th:object="${doctor}" th:action="@{/doctors/register}"
+					th:method="post">
+					
+					<div class="form-group row">
+						<label for="fullName" class="col-sm-2 col-form-label">Doctor</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="fullName"
+								th:field="*{fullName}" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('fullName')}"
+								th:errors="*{fullName}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="dni" class="col-sm-2 col-form-label">DNI</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="dni"
+								th:field="*{dni}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="date" class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-6">
+							<input type="date" class="form-control" id="date"
+								th:field="*{date}" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('date')}"
+								th:errors="*{date}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="age" class="col-sm-2 col-form-label">Edad</label>
+						<div class="col-sm-6">
+							<input type="number" class="form-control" id="age"
+								th:field="*{age}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="experienceTime" class="col-sm-2 col-form-label">Tiempo</label>
+						<div class="col-sm-6">
+							<input type="number" class="form-control" id="experienceTime"
+								th:field="*{experienceTime}" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('experienceTime')}"
+								th:errors="*{experienceTime}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="ciudad" class="col-sm-2 col-form-label">Ciudad</label>
+						<div class="col-sm-6">
+							<select id="ciudad" class="form-control" th:field="*{ciudad.id}">
+								<option th:each="ciudad: ${ciudades}" th:text="${ciudad.name}"
+									th:value="${ciudad.id}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+			<p th:text="${mensaje}" class="form-text text-success"></p>
+		</div>
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
 </body>
 
 </html>
