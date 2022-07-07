@@ -5,9 +5,62 @@
 <body>
 
 	<th:block th:include="fragments/navbar"></th:block>
-	<div class="container">Lista de Doctores</div>
+	<div class="container">
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de doctores</div>
+			<div class="card-body">
+
+
+				<form th:action="@{/doctors/find}" method="post"
+					th:object="${doctor}" class="form-inline">
+					<div class="form-group">
+						<label for="buscar">Buscar</label> <input type="text"
+							class="form-control" id="buscar" th:field="*{dni}"
+							required="required" placeholder="Ingrese dni del doctor">
+					</div>
+
+					<button type="submit" class="btn btn-danger">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+					<a th:href="@{/doctors}" class="btn btn-primary">Limpiar</a>
+				</form>
+				<br>
+				 <a th:href="@{/doctors/new}" class="btn btn-primary">Nuevo</a>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th>Doctor</th>
+							<th>Dni</th>
+							<th>Fecha de Colegiatura</th>
+							<th>Edad</th>
+							<th>Tiempo de experiencia</th>
+							<th>Bono</th>
+							<th>Ciudad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="doctor : ${doctores}">
+							<td th:text="${doctor.id}">1</td>
+							<td th:text="${doctor.fullName}">HAMP</td>
+							<td th:text="${doctor.dni}">HAMP</td>
+							<td th:text="${#dates.format(doctor.date, 'dd/MM/yyyy')}">HAMP</td>
+							<td th:text="${doctor.age}">HAMP</td>
+							<td th:text="${doctor.experienceTime}">HAMP</td>
+							<td
+								th:text="${#numbers.formatDecimal(doctor.survivalBonus,3,'COMMA',2,'POINT')}">HAMP</td>
+
+							<td th:text="${doctor.ciudad.name}">HAMP</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
 	<th:block th:include="fragments/scripts"></th:block>
-	
+
 </body>
 
 </html>
